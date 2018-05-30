@@ -9,7 +9,6 @@ import android.service.notification.StatusBarNotification
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
-import java.text.SimpleDateFormat
 
 class NotificationService : NotificationListenerService() {
 
@@ -19,7 +18,7 @@ class NotificationService : NotificationListenerService() {
         //通知が更新
         val post = "posted"
         val packageName = sbn.packageName
-        val postDate = SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(sbn.postTime)
+        val postDate = sbn.postTime/1000
         val ticket = sbn.notification.tickerText
         val message: String
         val category = sbn.notification.category
@@ -31,15 +30,14 @@ class NotificationService : NotificationListenerService() {
         } else {
 
         }
-
     }
 
-    override fun onNotificationRemoved(sbn: StatusBarNotification, rankingMap: RankingMap) {
+    override fun onNotificationRemoved(sbn: StatusBarNotification) {
 
         //通知が削除
         val remove = "removed"
         val packageName = sbn.packageName
-        val postDate = SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(sbn.postTime)
+        val postDate = sbn.postTime/1000
         val ticket = sbn.notification.tickerText
         val message: String
         val category = sbn.notification.category
@@ -50,7 +48,6 @@ class NotificationService : NotificationListenerService() {
         } else {
 
         }
-
 
     }
 
